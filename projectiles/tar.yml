@@ -1,0 +1,44 @@
+general:
+  projectileName: tar
+  description: "Packing the barrel with tar results in a blazing explosion."
+  itemName: coal_block
+  loadingItem: '173:0'
+
+cannonball:
+  entityType: EGG
+  isOnFire: true
+  velocity: 1
+  penetration: 0
+  doesPenetrationDamage: false
+  timeFuse: 0.0
+  automaticFiringDelay: 0.1
+  automaticFiringMagazineSize: 1
+  numberOfBullets: 12
+  spreadMultiplier: 3.0
+  properties:
+    - incendiary
+
+explosion:
+  explosionPower: 1
+  doesExplosionDamage: false
+  doesUnderwaterExplosion: false
+  directHitDamage: 2
+
+spawnOnExplosion:
+  enabled: true
+  blockRadius: 3
+  velocity: 0.5
+  block:
+    - '51:0 1-2' # Fire
+
+messages:
+  hasImpactMessage: false
+
+sounds:
+  loading: 'SLIME_WALK:5:5'
+  impact: 'BLAZE_BREATH:7:2'
+  impactProtected: 'CREEPER_HISS:3:2'
+  impactWater: 'CREEPER_HISS:3:0.2'
+
+loadPermission:
+  - cannons.artillerist

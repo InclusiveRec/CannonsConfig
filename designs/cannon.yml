@@ -1,0 +1,191 @@
+general:
+  designName: "cannon"
+  messageName: "cannon"
+  description: "A heavy artillery piece seen in sieges and on only the biggest of warships."
+  lastUserBecomesOwner: false
+
+signs:
+  isSignRequired: false
+
+ammunition:
+  gunpowderName: gunpowder
+  gunpowderType: '289:0'
+  needsGunpowder: true
+  gunpowderConsumption: true
+  projectileConsumption: true
+  ammoInfiniteForPlayer: false
+  ammoInfiniteForRedstone: false
+  autoreloadRedstone: true
+  removeChargeAfterFiring: true
+
+barrelProperties:
+  maxLoadableGunpowder: 4
+  multiplierVelocity: 1.4
+  spreadOfCannon: 1.0
+
+timings:
+  blastConfusion: 6
+  fuseBurnTime: 2
+  barrelCooldownTime: 0
+
+angles:
+  defaultHorizontalFacing: north
+  defaultVerticalAngle: 0.0
+  maxHorizontalAngle: 30.0
+  minHorizontalAngle: -30.0
+  maxVerticalAngle: 30.0
+  minVerticalAngle: -30.0
+  angleStepSize: 1.0
+  angleUpdateSpeed: 0.4
+
+impactPredictor:
+  enabled: false
+
+heatManagement:
+  enabled: true
+  automaticTemperatureControl: false
+  burnDamage: 0.2
+  burnSlowing: 3
+  heatIncreasePerGunpowder: 5.0
+  coolingTimeCoefficient: 50.0
+  coolingAmount: 30.0
+  automaticCooling: false
+  warningTemperature: 110.0
+  criticalTemperature: 160.0
+  maximumTemperature: 350.0
+  coolingItems:
+    - '326:0'
+    - '79:0'
+    - '80:0'
+  coolingItemsUsed:
+    - '325:0'
+    - '0:0'
+    - '0:0'
+
+overloading:
+  enabled: true
+  realMode: false
+  exponent: 6
+  chanceInc: 1
+  maxOverloadableGunpowder: 6
+  chanceOfExplosionPerGunpowder: 0.10
+  dependsOfTemperature: true
+
+realisticBehaviour:
+  isFiringItemRequired: true
+  sootPerGunpowder: 0.2
+  startingSoot: 30
+  projectilePushing: 4
+  explodingLoadedCannon: 3.0
+  fireAfterLoading: false
+
+permissions:
+  #all the permissions required for a player to use certain parts of the cannon
+  #more information can be found here: http://dev.bukkit.org/bukkit-plugins/cannons/pages/installation-and-configuration/cannons-2-0-and-up/permissions/
+  build: cannons.player.build
+  #give the cannon a new name
+  rename: cannons.player.rename
+  #permission for loading gunpowder and projectiles
+  load: cannons.player.load
+  #permission for firing a cannon
+  fire: cannons.player.fire
+  #permission for aiming with a cannon
+  adjust: cannons.player.adjust
+  #permission to used the ramrod (stick) to clean and push the projectile
+  ramrod: cannons.player.ramrod
+  #the cannon will follow the looking direction of the player if the aiming item is used (default: clock)
+  autoaim: cannons.player.autoaim
+  #player can add himself as an observer of a cannon with the cmd: '/cannons observer'
+  observer: cannons.player.observer
+  #not implemented yet
+  targetTracking: cannons.player.tracking
+  #if a player has no permission for redstone, it is not possible to wire a cannon with redstone or uses torches.
+  #firing a prewired cannon however is possible.
+  redstone: cannons.player.redstone
+  #this player can use a thermometer to measure the temperature of a cannon (default item for thermometer is a gold nugget)
+  redstone: cannons.player.thermometer
+  #cannon will autoreload if the player is sneaking and fires the cannon.
+  #The ammunition comes from the chest next to the cannon
+  autoreload: cannons.player.autoreload
+  #how much better the player can handle the cannon.
+  #possible values are cannons.player.spreadmultiplier.1 - cannons.player.spreadmultiplier.10 for a multiplier of 0.1 - 1.0
+  spreadMultiplier: cannons.player.spreadmultiplier
+
+allowedProjectiles:
+  - roundshot
+  - heavyshot
+  - tar
+
+sounds:
+  #sound effects for this cannon.
+  #You can enter new sounds in the following way 'NAME:VOLUME:PITCH'. Like 'IRONGOLEM_WALK:1:0.5'
+  #NAME: You can find valid names here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Sound.html
+  #VOLUME: How far you will hear this sound
+  #PITCH: How fast it is played. (0.5-2)
+  #USE: 'none:1:1' to disable this sound
+
+  #creating a new cannon
+  create: 'ANVIL_LAND:1:0.5'
+  #destroying a cannon
+  destroy: 'ZOMBIE_METAL:1:0.5'
+  #changing the angle of a cannon
+  adjust: 'IRONGOLEM_WALK:1:0.5'
+  #fuse igniting sound when firing
+  ignite: 'FUSE:5:1'
+  #firing sound
+  firing: 'EXPLODE:20:1.5'
+  #loading gunpowder
+  gunpowderLoading: 'DIG_SAND:1:1.5'
+  #loading gunpowder
+  gunpowderOverloading: 'DIG_GRASS:1:1.5'
+  #cooling a cannon
+  cool: 'FIZZ:1:1'
+  #smoke effects for touching a hot barrel
+  hot: 'FIZZ:1:1'
+  #cleaning with the ramrod
+  ramrodCleaning: 'DIG_SNOW:0.5:0'
+  #cleaning with ramrod done
+  ramrodCleaningDone: 'DIG_SNOW:0.5:1'
+  #pushing projectile into the barrel
+  ramrodPushing: 'DIG_STONE:0.5:0'
+  #pushing projectile done
+  ramrodPushingDone: 'ANVIL_LAND:0.5:0'
+  #measuring the cannon temperature with a thermometer
+  thermometer: 'ANVIL_LAND:1:1'
+  #enabling the aiming mode with a clock
+  enableAimingMode: 'NONE:1:1'
+  #disabling aiming mode
+  disableAimingMode: 'NONE:1:1'
+
+constructionBlocks:
+  #blocks of the cannon schematic which are ignored and not required to build the cannon. Default is sand
+  ignore: '12:0'
+  #the block which the projectile is fired from the cannon, direction can be adjusted using the defaultHorizontalFacing property. Default is block of snow
+  muzzle: '80:0'
+  #the block used to indicate when a cannon has been fired. default is torch. Makes fancy smoke on this location
+  firingIndicator: '50:5'
+  #the block used to indicate where the player can place chests or signs on the cannon. Default is a blank wall sign
+  chestAndSign: '68:-1'
+  #indicates where redstone torches can be placed for redstone autoload and firing to work. Default is redstone torch
+  redstoneTorch: '76:5'
+  #the block used to indicate where redstone wiring needs to be placed for redstone autoloading and firing to work. Default is redstone repeater
+  restoneWireAndRepeater: '93:-1'
+  #options for where a redstone signal needs to lead to in order to activate redstone autoloading and firing
+  redstoneTrigger: 
+    #the block used by the schematic to indicate where the redstone signal needs to lead to. Default is a lever
+    schematic: '69:3'
+    #the block used in game where the redstone signal needs to lead to. Default is stone button
+    ingame: '77:3'
+  #the blocks which a player right clicks in order to fire a cannon
+  rightClickTrigger: 
+    #the block used in the cannons schematic which is used to fire the cannon when right clicked by a player. Default is torch
+    schematic: '50:5'
+    #the block used in game to fire the cannon when right clicked by a player. Default is torch
+    ingame: '50:5'
+  #list of blocks in the schematic that will be protected from explosions (e.g. buttons, because they break easily)
+  protectedBlocks:
+    - '50:5'
+    - '69:-1'
+    - '77:-1'
+
+

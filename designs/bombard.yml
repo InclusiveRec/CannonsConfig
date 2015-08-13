@@ -1,0 +1,206 @@
+general:
+  #name of the cannon. This will show of on the cannon sign - therefore keep it short
+  designName: "bombard"
+  #This will be used for messages and will replace CANNON in all messages. (e.g. You created a classic cannon)
+  messageName: "bombard"
+  #a short description of the cannon
+  description: "A short-barreled artillery piece.  Inaccurate and short ranged, but light enough for ships."
+  #last user of cannon becomes to it's owner (cannon is public)
+  lastUserBecomesOwner: false
+
+
+signs:
+  #this cannon needs a sign to operate. Important for moving cannons.
+  isSignRequired: false
+
+
+ammunition:
+  gunpowderName: gunpowder
+  gunpowderType: '289:0'
+  needsGunpowder: true
+  gunpowderConsumption: true
+  projectileConsumption: true
+  ammoInfiniteForPlayer: false
+  ammoInfiniteForRedstone: false
+  autoreloadRedstone: true # permission not enabled
+  removeChargeAfterFiring: true
+
+
+barrelProperties:
+  #maximum gunpowder that can be loaded in the cannon
+  maxLoadableGunpowder: 3
+  #how much faster the loaded projectile will fired for each gunpowder loaded
+  multiplierVelocity: 1.0
+  #the angle of which a fired projectile spreads when fired. Basically the lower this is, the more accurate the cannon is
+  spreadOfCannon: 1.0
+
+
+timings:
+  #how long anyone near the cannon without a helmet will be confused when the cannon is fired
+  blastConfusion: 5
+  #the delay in seconds between when someone fires a cannon and when the actual projectiles fired from the cannon
+  fuseBurnTime: 1
+  #the time in seconds before the cannon can be fired again. Outdated due to heat management
+  barrelCooldownTime: 0
+
+
+angles:
+  #used to adjust in what direction a projectile is fired from a cannon. adjust this if your cannon is firing sideways or at itself
+  defaultHorizontalFacing: north
+  #the default angle vertical angle which the cannon aims at when built. this is good for mortars and similar upwards firing weapons
+  defaultVerticalAngle: 75.0
+  #min and max horizontal angles determine how far to the left and right the cannon can be aim
+  maxHorizontalAngle: 80.0
+  minHorizontalAngle: 0.0
+  #min and max vertical angles determine how far upwards or downwards the cannon can be aimed
+  maxVerticalAngle: 80.0
+  minVerticalAngle: 30.0
+  #if the cannon is on a ship the angles might be smaller
+  maxHorizontalAngleOnShip: 10.0
+  minHorizontalAngleOnShip: -10.0
+  maxVerticalAngleOnShip: 45.0
+  minVerticalAngleOnShip: -45.0
+  #each change of the angles will change angle by this amount
+  angleStepSize: 1.0
+  #how fast the cannons can be turned in seconds (fastest is 0.05s)
+  angleUpdateSpeed: 0.1
+
+
+#the impact predictor will show the impact location of a loaded cannon
+impactPredictor:
+  #enable the impact predictor
+  enabled: true
+  #the impact location will be shown after the last angle change of the cannon [s]
+  delay: 0.5
+  #update rate. How often the impact predictor will be calculated per second
+  update: 0.2
+
+
+heatManagement:
+  #if heat management is used or not
+  enabled: true
+  #if true the cannon will refuse to fire if the cannon temperature after firing would be higher than critical
+  automaticTemperatureControl: true
+  #touching a hot cannon will hurt (in full hearts)
+  burnDamage: 0.0
+  #touching a hot cannon will slow you (in seconds)
+  burnSlowing: 10
+  #how much firing one gunpowder will increase the temperature of the barrel
+  heatIncreasePerGunpowder: 5.0
+  #heat dissipation time coefficient. Smaller time coefficient means it cools down faster
+  coolingTimeCoefficient: 10.0
+  #how much cooling with the cooling item (config.yml e.g. water bucket) will cool the cannon
+  coolingAmount: 50.0
+  #searchs for cooling items in chests and cools the cannon if the cannon temperature above the warning temperature
+  automaticCooling: true
+  #the barrel is hot and you will notice this effect
+  warningTemperature: 60.0
+  #the barrel damage is critical and the cannon can explode
+  criticalTemperature: 150.0
+  #if the cannon exceeds this temperature it will explode
+  maximumTemperature: 300.0
+  #items to cool down a cannon
+  coolingItems:
+    - '326:0'
+    - '79:0'
+    - '80:0'
+  #items which are returned after cooling the cannon. The order is the same like above.
+  #setting a item to AIR (0:0) means it will only remove one item instead of replacing the item
+  coolingItemsUsed:
+    - '325:0'
+    - '0:0'
+    - '0:0'
+
+
+#cannon can be loaded with more gunpowder, but might explode after firing
+overloading:
+  #cannon can explode if overloaded with gunpowder
+  #chance = chanceInc * ((all loaded gunpowder - maximum loadable gunpowder without overloading) * ChanceOfExplosionPerGunpowder)^Exponent
+  enabled: true
+  #in real mode cannon can also explode when not overloaded
+  #chance = chanceInc * (all loaded gunpowder * ChanceOfExplosionPerGunpowder)^Exponent
+  realMode: false
+  exponent: 2
+  chanceInc: 1
+  maxOverloadableGunpowder: 3
+  chanceOfExplosionPerGunpowder: 0.05
+  #the explosion chance will be multiplied by cannon's temperature / maximumTemperature
+  dependsOfTemperature: true
+  #loaded gunpowder = 3 normal + 1 overloaded
+  #exploding change = 1 * ((3+1)*0.05)^2 = 4%
+
+
+realisticBehaviour:
+  isFiringItemRequired: true
+  sootPerGunpowder: 0.2
+  startingSoot: 30
+  projectilePushing: 4
+  explodingLoadedCannon: 4.0
+  fireAfterLoading: false
+
+
+permissions:
+  build: cannons.tech.medieval
+  rename: cannons.tech.medieval
+  load: cannons.tech.medieval
+  fire: cannons.tech.medieval
+  adjust: cannons.tech.medieval
+  ramrod: cannons.tech.medieval
+  autoaim: cannons.tech.medieval
+  redstone: cannons.tech.industrial
+  thermometer: cannons.cannons.tech.industrial
+  autoreload: cannons.tech.industrial
+  #possible values are cannons.tech.targeting.1 - cannons.tech.targeting.10 for a multiplier of 0.1 - 1.0
+  spreadMultiplier: cannons.tech.targeting
+allowedProjectiles:
+  - roundshot
+  - heavyshot
+sounds:
+  create: 'ANVIL_LAND:1:0.5'
+  destroy: 'ZOMBIE_METAL:1:0.5'
+  adjust: 'IRONGOLEM_WALK:1:0.5'
+  ignite: 'FUSE:5:1'
+  firing: 'EXPLODE:20:1.5'
+  gunpowderLoading: 'DIG_SAND:1:1.5'
+  gunpowderOverloading: 'DIG_GRASS:1:1.5'
+  cool: 'FIZZ:1:1'
+  hot: 'FIZZ:1:1'
+  ramrodCleaning: 'DIG_SNOW:0.5:0'
+  ramrodCleaningDone: 'DIG_SNOW:0.5:1'
+  ramrodPushing: 'DIG_STONE:0.5:0'
+  ramrodPushingDone: 'ANVIL_LAND:0.5:0'
+  thermometer: 'ANVIL_LAND:1:1'
+  enableAimingMode: 'NONE:1:1'
+  disableAimingMode: 'NONE:1:1'
+constructionBlocks:
+  #blocks of the cannon schematic which are ignored and not required to build the cannon. Default is sand
+  ignore: '12:0'
+  #the block which the projectile is fired from the cannon, direction can be adjusted using the defaultHorizontalFacing property. Default is block of snow
+  muzzle: '80:0'
+  #the block used to indicate when a cannon has been fired. default is torch. Makes fancy smoke on this location
+  firingIndicator: '50:-1'
+  #the block used to indicate where the player can place chests or signs on the cannon. Default is a blank wall sign
+  chestAndSign: '68:-1'
+  #indicates where redstone torches can be placed for redstone autoload and firing to work. Default is redstone torch
+  redstoneTorch: '76:5'
+  #the block used to indicate where redstone wiring needs to be placed for redstone autoloading and firing to work. Default is redstone repeater
+  restoneWireAndRepeater: '93:-1'
+  #options for where a redstone signal needs to lead to in order to activate redstone autoloading and firing
+  redstoneTrigger: 
+    #the block used by the schematic to indicate where the redstone signal needs to lead to. Default is a lever
+    schematic: '69:3'
+    #the block used in game where the redstone signal needs to lead to. Default is stone button
+    ingame: '77:3'
+  #the blocks which a player right clicks in order to fire a cannon
+  rightClickTrigger: 
+    #the block used in the cannons schematic which is used to fire the cannon when right clicked by a player. Default is torch
+    schematic: '50:-1'
+    #the block used in game to fire the cannon when right clicked by a player. Default is torch
+    ingame: '50:-1'
+  #list of blocks in the schematic that will be protected from explosions (e.g. buttons, because they break easily)
+  protectedBlocks:
+    - '50:5'
+    - '69:-1'
+    - '77:-1'
+
+
